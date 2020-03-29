@@ -5,5 +5,12 @@
  */
 
 module.exports = {
-  /* Your site config here */
+  plugins: [
+    {
+      resolve: "gatsby-source-prismic-graphql",
+      options: {
+        repositoryName: "robbertvancaem-test", // (REQUIRED, replace with your own)
+      },
+    },
+  ],
 }
