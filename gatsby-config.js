@@ -5,6 +5,9 @@
  */
 
 module.exports = {
+  siteMetadata: {
+    title: "Sneaker Town 20 - A Gatsby/Prismic experiment",
+  },
   plugins: [
     {
       resolve: "gatsby-source-prismic-graphql",
@@ -12,5 +15,13 @@ module.exports = {
         repositoryName: "robbertvancaem-test", // (REQUIRED, replace with your own)
       },
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: ["Kanit", "Open Sans"],
+        display: "swap",
+      },
+    },
+    `gatsby-plugin-styled-components`,
   ],
 }

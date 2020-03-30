@@ -1,19 +1,22 @@
 import React from "react"
 import { graphql } from "gatsby"
-
 import { RichText } from "prismic-reactjs"
+
+import Layout from "../components/layout"
+import Headline from "../components/headline"
+import Navigation from "../components/navigation"
 
 export default ({ data }) => {
   const doc = data.prismic.allHomepages.edges.slice(0, 1).pop()
-  const shoes = data.prismic.allNewShoess.edges
 
   if (!doc) {
     return null
   }
 
   return (
-    <div>
-      {RichText.render(doc.node.title)}
+    <Layout>
+      <Navigation />
+      <Headline>{RichText.asText(doc.node.title)}</Headline>
       {doc.node.body.map((slice, index) => {
         if (slice.type === "text") {
           return RichText.render(slice.primary.text)
@@ -45,18 +48,7 @@ export default ({ data }) => {
         }
         return null
       })}
-      {shoes.map(({ node }) => (
-        <div key={node._meta.uid}>
-          <img
-            src={node.image.url}
-            alt={node.image.alt}
-            style={{
-              maxWidth: "100%",
-            }}
-          />
-        </div>
-      ))}
-    </div>
+    </Layout>
   )
 }
 
@@ -93,17 +85,6 @@ export const query = graphql`
                   image_captions
                 }
               }
-            }
-          }
-        }
-      }
-      allNewShoess {
-        totalCount
-        edges {
-          node {
-            image
-            _meta {
-              uid
             }
           }
         }
